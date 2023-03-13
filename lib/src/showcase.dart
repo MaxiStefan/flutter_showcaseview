@@ -439,18 +439,21 @@ class _ShowcaseState extends State<Showcase> {
   }
 
   Future<void> prevIfAny() async {
-    if (widget.onPrevItemCalled != null) await widget.onPrevItemCalled!();
+    if (showCaseWidgetState.activeWidgetId != null &&
+        showCaseWidgetState.activeWidgetId! - 1 >= 0) {
+      if (widget.onPrevItemCalled != null) await widget.onPrevItemCalled!();
 
-    if (timer != null && timer!.isActive) {
-      if (showCaseWidgetState.enableAutoPlayLock) {
-        return;
+      if (timer != null && timer!.isActive) {
+        if (showCaseWidgetState.enableAutoPlayLock) {
+          return;
+        }
+        timer!.cancel();
+      } else if (timer != null && !timer!.isActive) {
+        timer = null;
       }
-      timer!.cancel();
-    } else if (timer != null && !timer!.isActive) {
-      timer = null;
+      await _reverseAnimateTooltip();
+      showCaseWidgetState.prev(widget.key);
     }
-    await _reverseAnimateTooltip();
-    showCaseWidgetState.prev(widget.key);
   }
 
   Future<void> _nextIfAny() async {
