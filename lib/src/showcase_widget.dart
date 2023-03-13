@@ -179,6 +179,25 @@ class ShowCaseWidgetState extends State<ShowCaseWidget> {
     }
   }
 
+  void prev(GlobalKey? id) {
+    if (ids != null &&
+        ids![activeWidgetId!] == id &&
+        (activeWidgetId! - 1) >= 0) {
+      setState(() {
+        _onComplete();
+        activeWidgetId = activeWidgetId! - 1;
+
+        _onStart();
+        if (activeWidgetId! >= ids!.length) {
+          _cleanupAfterSteps();
+          if (widget.onFinish != null) {
+            widget.onFinish!();
+          }
+        }
+      });
+    }
+  }
+
   /// Completes current active showcase and starts next one
   /// otherwise will finish the entire showcase view
   void next() {

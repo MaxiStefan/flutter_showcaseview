@@ -35,6 +35,15 @@ import 'showcase_widget.dart';
 import 'tooltip_widget.dart';
 
 class Showcase extends StatefulWidget {
+  final String? nextButtonText;
+  final String? prevButtonText;
+  final String? skipButtonText;
+  final bool showNextButton;
+  final bool showPrevButton;
+  final bool showSkipButton;
+  final FutureOr<void> Function()? onNextItemCalled;
+  final FutureOr<void> Function()? onPrevItemCalled;
+
   /// A key that is unique across the entire app.
   ///
   /// This Key will be used to control state of individual showcase and also
@@ -273,6 +282,14 @@ class Showcase extends StatefulWidget {
     this.tooltipPosition,
     this.titlePadding,
     this.descriptionPadding,
+    this.nextButtonText = 'Next',
+    this.prevButtonText = 'Prev',
+    this.skipButtonText = 'Skip',
+    this.showNextButton = true,
+    this.showPrevButton = true,
+    this.showSkipButton = true,
+    this.onNextItemCalled,
+    this.onPrevItemCalled,
   })  : height = null,
         width = null,
         container = null,
@@ -309,6 +326,14 @@ class Showcase extends StatefulWidget {
     this.onTargetDoubleTap,
     this.disableDefaultTargetGestures = false,
     this.tooltipPosition,
+    this.nextButtonText = 'Next',
+    this.prevButtonText = 'Prev',
+    this.skipButtonText = 'Skip',
+    this.showNextButton = true,
+    this.showPrevButton = true,
+    this.showSkipButton = true,
+    this.onNextItemCalled,
+    this.onPrevItemCalled,
   })  : showArrow = false,
         onToolTipClick = null,
         scaleAnimationDuration = const Duration(milliseconds: 300),
@@ -413,7 +438,24 @@ class _ShowcaseState extends State<Showcase> {
     return widget.child;
   }
 
+  Future<void> prevIfAny() async {
+    if (widget.onPrevItemCalled != null) await widget.onPrevItemCalled!();
+
+    if (timer != null && timer!.isActive) {
+      if (showCaseWidgetState.enableAutoPlayLock) {
+        return;
+      }
+      timer!.cancel();
+    } else if (timer != null && !timer!.isActive) {
+      timer = null;
+    }
+    await _reverseAnimateTooltip();
+    showCaseWidgetState.previous();
+  }
+
   Future<void> _nextIfAny() async {
+    if (widget.onNextItemCalled != null) await widget.onNextItemCalled!();
+
     if (timer != null && timer!.isActive) {
       if (showCaseWidgetState.enableAutoPlayLock) {
         return;
@@ -552,6 +594,15 @@ class _ShowcaseState extends State<Showcase> {
             tooltipPosition: widget.tooltipPosition,
             titlePadding: widget.titlePadding,
             descriptionPadding: widget.descriptionPadding,
+            showNextButton: widget.showNextButton,
+            showPrevButton: widget.showPrevButton,
+            showSkipButton: widget.showSkipButton,
+            nextButtonText: widget.nextButtonText,
+            prevButtonText: widget.prevButtonText,
+            skipButtonText: widget.skipButtonText,
+            onNextButtonTap: _nextIfAny,
+            onPrevButtonTap: prevIfAny,
+            onSkipButtonTap: () => showCaseWidgetState.dismiss(),
           ),
         ],
       ],

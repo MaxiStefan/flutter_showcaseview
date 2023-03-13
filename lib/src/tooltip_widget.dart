@@ -59,6 +59,15 @@ class ToolTipWidget extends StatefulWidget {
   final TooltipPosition? tooltipPosition;
   final EdgeInsets? titlePadding;
   final EdgeInsets? descriptionPadding;
+  final bool? showNextButton;
+  final bool? showSkipButton;
+  final bool? showPrevButton;
+  final String? nextButtonText;
+  final String? skipButtonText;
+  final String? prevButtonText;
+  final VoidCallback? onNextButtonTap;
+  final VoidCallback? onSkipButtonTap;
+  final VoidCallback? onPrevButtonTap;
 
   const ToolTipWidget({
     Key? key,
@@ -90,6 +99,15 @@ class ToolTipWidget extends StatefulWidget {
     this.tooltipPosition,
     this.titlePadding,
     this.descriptionPadding,
+    this.showNextButton,
+    this.showPrevButton,
+    this.showSkipButton,
+    this.nextButtonText,
+    this.prevButtonText,
+    this.skipButtonText,
+    this.onNextButtonTap,
+    this.onPrevButtonTap,
+    this.onSkipButtonTap,
   }) : super(key: key);
 
   @override
@@ -453,6 +471,24 @@ class _ToolTipWidgetState extends State<ToolTipWidget>
                                               ),
                                     ),
                                   ),
+                                  if (widget.description != null)
+                                    Text(
+                                      widget.description!,
+                                      style: widget.descTextStyle ??
+                                          Theme.of(context)
+                                              .textTheme
+                                              .titleSmall!
+                                              .merge(
+                                                TextStyle(
+                                                  color: widget.textColor,
+                                                ),
+                                              ),
+                                    ),
+                                  if ((widget.showNextButton ?? false) ||
+                                      (widget.showSkipButton ?? false)) ...[
+                                    const SizedBox(height: 8.0),
+                                    _buildBottomButtons(context),
+                                  ]
                                 ],
                               ),
                             ),
@@ -511,6 +547,59 @@ class _ToolTipWidgetState extends State<ToolTipWidget>
     var tempPos = position;
     tempPos = Offset(position!.dx, position!.dy + size!.height);
     setState(() => position = tempPos);
+  }
+
+  Widget _buildBottomButtons(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        if (widget.showPrevButton ?? false)
+          InkWell(
+            onTap: widget.onPrevButtonTap,
+            child: Padding(
+              padding: const EdgeInsets.all(4.0),
+              child: Text(
+                widget.prevButtonText ?? "Prev",
+                style: widget.descTextStyle ??
+                    Theme.of(context)
+                        .textTheme
+                        .titleSmall!
+                        .merge(TextStyle(color: widget.textColor)),
+              ),
+            ),
+          ),
+        if (widget.showSkipButton ?? false)
+          InkWell(
+            onTap: widget.onSkipButtonTap,
+            child: Padding(
+              padding: const EdgeInsets.all(4.0),
+              child: Text(
+                widget.skipButtonText ?? "Skip",
+                style: widget.descTextStyle ??
+                    Theme.of(context)
+                        .textTheme
+                        .titleSmall!
+                        .merge(TextStyle(color: widget.textColor)),
+              ),
+            ),
+          ),
+        if (widget.showNextButton ?? false)
+          InkWell(
+            onTap: widget.onNextButtonTap,
+            child: Padding(
+              padding: const EdgeInsets.all(4.0),
+              child: Text(
+                widget.nextButtonText ?? "Next",
+                style: widget.descTextStyle ??
+                    Theme.of(context)
+                        .textTheme
+                        .titleSmall!
+                        .merge(TextStyle(color: widget.textColor)),
+              ),
+            ),
+          ),
+      ],
+    );
   }
 
   Size _textSize(String text, TextStyle style) {

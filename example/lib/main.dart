@@ -1,7 +1,7 @@
 import 'dart:developer';
 
-import 'package:example/detailscreen.dart';
-import 'package:example/helper.dart';
+import 'detailscreen.dart';
+import 'helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:showcaseview/showcaseview.dart';
