@@ -484,11 +484,11 @@ class _ToolTipWidgetState extends State<ToolTipWidget>
                                                 ),
                                               ),
                                     ),
-                                  if ((widget.showNextButton ?? false) ||
-                                      (widget.showSkipButton ?? false)) ...[
-                                    const SizedBox(height: 8.0),
-                                    _buildBottomButtons(context),
-                                  ]
+                                  // if ((widget.showNextButton ?? false) ||
+                                  //     (widget.showSkipButton ?? false)) ...[
+                                  //   const SizedBox(height: 8.0),
+                                  //   _buildBottomButtons(context),
+                                  // ]
                                 ],
                               ),
                             ),
