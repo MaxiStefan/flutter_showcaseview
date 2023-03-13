@@ -251,12 +251,12 @@ class Showcase extends StatefulWidget {
     this.targetShapeBorder = const RoundedRectangleBorder(
       borderRadius: BorderRadius.all(Radius.circular(8)),
     ),
-    this.overlayColor = const Color(0xff1e4c64),
+    this.overlayColor = Colors.black,
     this.overlayOpacity = 0.75,
     this.titleTextStyle,
     this.descTextStyle,
     this.tooltipBackgroundColor = const Color(0xff1e4c64),
-    this.textColor = Colors.black,
+    this.textColor = Colors.white,
     this.scrollLoadingWidget = const CircularProgressIndicator(
       valueColor: AlwaysStoppedAnimation(Colors.white),
     ),
