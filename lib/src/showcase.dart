@@ -450,7 +450,7 @@ class _ShowcaseState extends State<Showcase> {
       timer = null;
     }
     await _reverseAnimateTooltip();
-    showCaseWidgetState.previous();
+    showCaseWidgetState.prev(widget.key);
   }
 
   Future<void> _nextIfAny() async {
