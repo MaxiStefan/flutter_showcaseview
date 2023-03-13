@@ -234,6 +234,7 @@ class ShowCaseWidgetState extends State<ShowCaseWidget> {
   /// Dismiss entire showcase view
   void dismiss() {
     if (mounted) setState(_cleanupAfterSteps);
+    if (widget.onFinish != null) widget.onFinish!();
   }
 
   void _onStart() {
