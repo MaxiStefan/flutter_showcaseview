@@ -471,19 +471,6 @@ class _ToolTipWidgetState extends State<ToolTipWidget>
                                               ),
                                     ),
                                   ),
-                                  if (widget.description != null)
-                                    Text(
-                                      widget.description!,
-                                      style: widget.descTextStyle ??
-                                          Theme.of(context)
-                                              .textTheme
-                                              .titleSmall!
-                                              .merge(
-                                                TextStyle(
-                                                  color: widget.textColor,
-                                                ),
-                                              ),
-                                    ),
                                   if ((widget.showNextButton ?? false) ||
                                       (widget.showSkipButton ?? false)) ...[
                                     const SizedBox(height: 8.0),
