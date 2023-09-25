@@ -68,6 +68,8 @@ class ToolTipWidget extends StatefulWidget {
   final VoidCallback? onNextButtonTap;
   final VoidCallback? onSkipButtonTap;
   final VoidCallback? onPrevButtonTap;
+  final TextDirection? titleTextDirection;
+  final TextDirection? descriptionTextDirection;
 
   const ToolTipWidget({
     Key? key,
@@ -108,6 +110,8 @@ class ToolTipWidget extends StatefulWidget {
     this.onNextButtonTap,
     this.onPrevButtonTap,
     this.onSkipButtonTap,
+    this.titleTextDirection,
+    this.descriptionTextDirection,
   }) : super(key: key);
 
   @override
@@ -443,6 +447,8 @@ class _ToolTipWidgetState extends State<ToolTipWidget>
                                       child: Text(
                                         widget.title!,
                                         textAlign: widget.titleAlignment,
+                                        textDirection:
+                                            widget.titleTextDirection,
                                         style: widget.titleTextStyle ??
                                             Theme.of(context)
                                                 .textTheme
@@ -460,6 +466,8 @@ class _ToolTipWidgetState extends State<ToolTipWidget>
                                     child: Text(
                                       widget.description!,
                                       textAlign: widget.descriptionAlignment,
+                                      textDirection:
+                                          widget.descriptionTextDirection,
                                       style: widget.descTextStyle ??
                                           Theme.of(context)
                                               .textTheme

@@ -241,12 +241,24 @@ class Showcase extends StatefulWidget {
   /// Provides padding around the description. Default padding is zero.
   final EdgeInsets? descriptionPadding;
 
+  /// Provides text direction of tooltip title.
+  final TextDirection? titleTextDirection;
+
+  /// Provides text direction of tooltip description.
+  final TextDirection? descriptionTextDirection;
+
+  /// Provides a callback when barrier has been clicked.
+  ///
+  /// Note-: Even if barrier interactions are disabled, this handler
+  /// will still provide a callback.
+  final VoidCallback? onBarrierClick;
+
   const Showcase({
     required this.key,
+    required this.description,
     required this.child,
     this.title,
     this.titleAlignment = TextAlign.start,
-    required this.description,
     this.descriptionAlignment = TextAlign.start,
     this.targetShapeBorder = const RoundedRectangleBorder(
       borderRadius: BorderRadius.all(Radius.circular(8)),
@@ -290,6 +302,9 @@ class Showcase extends StatefulWidget {
     this.showSkipButton = true,
     this.onNextItemCalled,
     this.onPrevItemCalled,
+    this.titleTextDirection,
+    this.descriptionTextDirection,
+    this.onBarrierClick,
   })  : height = null,
         width = null,
         container = null,
@@ -302,10 +317,10 @@ class Showcase extends StatefulWidget {
 
   const Showcase.withWidget({
     required this.key,
-    required this.child,
-    required this.container,
     required this.height,
     required this.width,
+    required this.container,
+    required this.child,
     this.targetShapeBorder = const RoundedRectangleBorder(
       borderRadius: BorderRadius.all(
         Radius.circular(8),
@@ -334,6 +349,7 @@ class Showcase extends StatefulWidget {
     this.showSkipButton = true,
     this.onNextItemCalled,
     this.onPrevItemCalled,
+    this.onBarrierClick,
   })  : showArrow = false,
         onToolTipClick = null,
         scaleAnimationDuration = const Duration(milliseconds: 300),
@@ -352,6 +368,8 @@ class Showcase extends StatefulWidget {
         tooltipPadding = const EdgeInsets.symmetric(vertical: 8),
         titlePadding = null,
         descriptionPadding = null,
+        titleTextDirection = null,
+        descriptionTextDirection = null,
         assert(overlayOpacity >= 0.0 && overlayOpacity <= 1.0,
             "overlay opacity must be between 0 and 1.");
 
@@ -521,6 +539,7 @@ class _ShowcaseState extends State<Showcase> {
             if (!showCaseWidgetState.disableBarrierInteraction) {
               _nextIfAny();
             }
+            widget.onBarrierClick?.call();
           },
           child: ClipPath(
             clipper: RRectClipper(
@@ -606,6 +625,8 @@ class _ShowcaseState extends State<Showcase> {
             onNextButtonTap: _nextIfAny,
             onPrevButtonTap: prevIfAny,
             onSkipButtonTap: () => showCaseWidgetState.dismiss(),
+            titleTextDirection: widget.titleTextDirection,
+            descriptionTextDirection: widget.descriptionTextDirection,
           ),
         ],
       ],
