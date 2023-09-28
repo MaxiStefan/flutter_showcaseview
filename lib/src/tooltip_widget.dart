@@ -554,76 +554,89 @@ class _ToolTipWidgetState extends State<ToolTipWidget>
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         if (widget.showPrevButton ?? false)
-          InkWell(
-            onTap: widget.onPrevButtonTap,
-            child: Padding(
-              padding: const EdgeInsets.all(4.0),
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5),
-                  color: widget.buttonBackgroundColor ?? Colors.white,
-                  border: Border.all(
-                    color: widget.buttonBorderColor ?? const Color(0xff1e4c64),
+          Expanded(
+            flex: 2,
+            child: InkWell(
+              onTap: widget.onPrevButtonTap,
+              child: Padding(
+                padding: const EdgeInsets.all(4.0),
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(5),
+                    color: widget.buttonBackgroundColor ?? Colors.white,
+                    border: Border.all(
+                      color:
+                          widget.buttonBorderColor ?? const Color(0xff1e4c64),
+                    ),
                   ),
-                ),
-                padding: const EdgeInsets.all(10.0),
-                child: Text(
-                  widget.prevButtonText ?? "Previous",
-                  style: widget.buttonStyle ??
-                      TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
-                        color: Color(0xff1e4c64),
-                      ),
+                  padding: const EdgeInsets.all(10.0),
+                  child: Text(
+                    widget.prevButtonText ?? "Previous",
+                    textAlign: TextAlign.center,
+                    style: widget.buttonStyle ??
+                        TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
+                          color: Color(0xff1e4c64),
+                        ),
+                  ),
                 ),
               ),
             ),
           ),
         if (widget.showSkipButton ?? false)
-          InkWell(
-            onTap: widget.onSkipButtonTap,
-            child: Padding(
-              padding: const EdgeInsets.all(4.0),
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5),
-                  color: widget.buttonBackgroundColor ?? Colors.white,
-                  border: Border.all(
-                    color: widget.buttonBorderColor ?? Color(0xff1e4c64),
+          Expanded(
+            flex: 2,
+            child: InkWell(
+              onTap: widget.onSkipButtonTap,
+              child: Padding(
+                padding: const EdgeInsets.all(4.0),
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(5),
+                    color: widget.buttonBackgroundColor ?? Colors.white,
+                    border: Border.all(
+                      color: widget.buttonBorderColor ?? Color(0xff1e4c64),
+                    ),
                   ),
-                ),
-                padding: const EdgeInsets.all(10.0),
-                child: Text(
-                  widget.skipButtonText ?? "Skip",
-                  style: widget.buttonStyle ??
-                      TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
-                        color: Color(0xff1e4c64),
-                      ),
+                  padding: const EdgeInsets.all(10.0),
+                  child: Text(
+                    widget.skipButtonText ?? "Skip",
+                    textAlign: TextAlign.center,
+                    style: widget.buttonStyle ??
+                        TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
+                          color: Color(0xff1e4c64),
+                        ),
+                  ),
                 ),
               ),
             ),
           ),
         if (widget.showNextButton ?? false)
-          InkWell(
-            onTap: widget.onNextButtonTap,
-            child: Padding(
-              padding: const EdgeInsets.all(4.0),
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5),
-                  color: widget.buttonBackgroundColor ?? Color(0xff1e4c64),
-                ),
-                padding: const EdgeInsets.all(10.0),
-                child: Text(
-                  widget.nextButtonText ?? "Next",
-                  style: widget.buttonStyle ??
-                      TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
-                        color: Colors.white,
-                      ),
+          Expanded(
+            flex: 2,
+            child: InkWell(
+              onTap: widget.onNextButtonTap,
+              child: Padding(
+                padding: const EdgeInsets.all(4.0),
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(5),
+                    color: widget.buttonBackgroundColor ?? Color(0xff1e4c64),
+                  ),
+                  padding: const EdgeInsets.all(10.0),
+                  child: Text(
+                    widget.nextButtonText ?? "Next",
+                    textAlign: TextAlign.center,
+                    style: widget.buttonStyle ??
+                        TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.white,
+                        ),
+                  ),
                 ),
               ),
             ),
