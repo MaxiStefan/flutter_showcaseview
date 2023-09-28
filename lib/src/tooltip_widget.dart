@@ -551,7 +551,7 @@ class _ToolTipWidgetState extends State<ToolTipWidget>
 
   Widget _buildBottomButtons(BuildContext context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         if (widget.showPrevButton ?? false)
           Expanded(
