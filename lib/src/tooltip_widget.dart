@@ -65,6 +65,9 @@ class ToolTipWidget extends StatefulWidget {
   final String? nextButtonText;
   final String? skipButtonText;
   final String? prevButtonText;
+  final TextStyle? buttonStyle;
+  final Color? buttonBackgroundColor;
+  final Color? buttonBorderColor;
   final VoidCallback? onNextButtonTap;
   final VoidCallback? onSkipButtonTap;
   final VoidCallback? onPrevButtonTap;
@@ -112,6 +115,9 @@ class ToolTipWidget extends StatefulWidget {
     this.onSkipButtonTap,
     this.titleTextDirection,
     this.descriptionTextDirection,
+    this.buttonStyle,
+    this.buttonBackgroundColor,
+    this.buttonBorderColor,
   }) : super(key: key);
 
   @override
@@ -140,9 +146,8 @@ class _ToolTipWidgetState extends State<ToolTipWidget>
         position.dy + ((widget.position?.getHeight() ?? 0) / 2);
     final topPosition = position.dy - ((widget.position?.getHeight() ?? 0) / 2);
     final hasSpaceInTop = topPosition >= height;
-    final EdgeInsets viewInsets = EdgeInsets.fromWindowPadding(
-        WidgetsBinding.instance.window.viewInsets,
-        WidgetsBinding.instance.window.devicePixelRatio);
+    final EdgeInsets viewInsets = EdgeInsets.fromViewPadding(
+        View.of(context).viewInsets, View.of(context).devicePixelRatio);
     final double actualVisibleScreenHeight =
         (widget.screenSize?.height ?? MediaQuery.of(context).size.height) -
             viewInsets.bottom;
@@ -553,13 +558,24 @@ class _ToolTipWidgetState extends State<ToolTipWidget>
             onTap: widget.onPrevButtonTap,
             child: Padding(
               padding: const EdgeInsets.all(4.0),
-              child: Text(
-                widget.prevButtonText ?? "Prev",
-                style: widget.descTextStyle ??
-                    Theme.of(context)
-                        .textTheme
-                        .titleSmall!
-                        .merge(TextStyle(color: widget.textColor)),
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5),
+                  color: widget.buttonBackgroundColor ?? Colors.white,
+                  border: Border.all(
+                    color: widget.buttonBorderColor ?? const Color(0xff1e4c64),
+                  ),
+                ),
+                padding: const EdgeInsets.all(10.0),
+                child: Text(
+                  widget.prevButtonText ?? "Previous",
+                  style: widget.buttonStyle ??
+                      TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                        color: Color(0xff1e4c64),
+                      ),
+                ),
               ),
             ),
           ),
@@ -568,13 +584,24 @@ class _ToolTipWidgetState extends State<ToolTipWidget>
             onTap: widget.onSkipButtonTap,
             child: Padding(
               padding: const EdgeInsets.all(4.0),
-              child: Text(
-                widget.skipButtonText ?? "Skip",
-                style: widget.descTextStyle ??
-                    Theme.of(context)
-                        .textTheme
-                        .titleSmall!
-                        .merge(TextStyle(color: widget.textColor)),
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5),
+                  color: widget.buttonBackgroundColor ?? Colors.white,
+                  border: Border.all(
+                    color: widget.buttonBorderColor ?? Color(0xff1e4c64),
+                  ),
+                ),
+                padding: const EdgeInsets.all(10.0),
+                child: Text(
+                  widget.skipButtonText ?? "Skip",
+                  style: widget.buttonStyle ??
+                      TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                        color: Color(0xff1e4c64),
+                      ),
+                ),
               ),
             ),
           ),
@@ -583,13 +610,21 @@ class _ToolTipWidgetState extends State<ToolTipWidget>
             onTap: widget.onNextButtonTap,
             child: Padding(
               padding: const EdgeInsets.all(4.0),
-              child: Text(
-                widget.nextButtonText ?? "Next",
-                style: widget.descTextStyle ??
-                    Theme.of(context)
-                        .textTheme
-                        .titleSmall!
-                        .merge(TextStyle(color: widget.textColor)),
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5),
+                  color: widget.buttonBackgroundColor ?? Color(0xff1e4c64),
+                ),
+                padding: const EdgeInsets.all(10.0),
+                child: Text(
+                  widget.nextButtonText ?? "Next",
+                  style: widget.buttonStyle ??
+                      TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.white,
+                      ),
+                ),
               ),
             ),
           ),

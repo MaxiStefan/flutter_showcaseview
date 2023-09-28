@@ -38,6 +38,9 @@ class Showcase extends StatefulWidget {
   final String? nextButtonText;
   final String? prevButtonText;
   final String? skipButtonText;
+  final TextStyle? buttonStyle;
+  final Color? buttonBackgroundColor;
+  final Color? buttonBorderColor;
   final bool showNextButton;
   final bool showPrevButton;
   final bool showSkipButton;
@@ -305,6 +308,9 @@ class Showcase extends StatefulWidget {
     this.titleTextDirection,
     this.descriptionTextDirection,
     this.onBarrierClick,
+    this.buttonStyle,
+    this.buttonBackgroundColor,
+    this.buttonBorderColor,
   })  : height = null,
         width = null,
         container = null,
@@ -350,6 +356,9 @@ class Showcase extends StatefulWidget {
     this.onNextItemCalled,
     this.onPrevItemCalled,
     this.onBarrierClick,
+    this.buttonStyle,
+    this.buttonBackgroundColor,
+    this.buttonBorderColor,
   })  : showArrow = false,
         onToolTipClick = null,
         scaleAnimationDuration = const Duration(milliseconds: 300),
@@ -622,6 +631,9 @@ class _ShowcaseState extends State<Showcase> {
             nextButtonText: widget.nextButtonText,
             prevButtonText: widget.prevButtonText,
             skipButtonText: widget.skipButtonText,
+            buttonBackgroundColor: widget.buttonBackgroundColor,
+            buttonBorderColor: widget.buttonBorderColor,
+            buttonStyle: widget.buttonStyle,
             onNextButtonTap: _nextIfAny,
             onPrevButtonTap: prevIfAny,
             onSkipButtonTap: () => showCaseWidgetState.dismiss(),
