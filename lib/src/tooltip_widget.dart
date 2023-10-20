@@ -23,11 +23,11 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:showcaseview/src/tooltip_widgets/tooltip_decription_widget.dart';
 
 import 'enum.dart';
 import 'get_position.dart';
 import 'measure_size.dart';
+import 'tooltip_decription_widget.dart';
 
 const _kDefaultPaddingFromParent = 14.0;
 
@@ -38,8 +38,7 @@ class ToolTipWidget extends StatefulWidget {
   final String? title;
   final TextAlign? titleAlignment;
   final String? description;
-  final List<TextSpan>?
-      descriptionList; // TODO Traian: Add list of TextSpan param
+  final List<TextSpan>? descriptionList;
   final TextAlign? descriptionAlignment;
   final TextStyle? titleTextStyle;
   final TextStyle? descTextStyle;
@@ -102,7 +101,7 @@ class ToolTipWidget extends StatefulWidget {
     required this.tooltipBorderRadius,
     required this.scaleAnimationDuration,
     required this.scaleAnimationCurve,
-    this.descriptionList, // TODO Traian: Added description List
+    this.descriptionList,
     this.scaleAnimationAlignment,
     this.isTooltipDismissed = false,
     this.tooltipPosition,
@@ -492,7 +491,7 @@ class _ToolTipWidgetState extends State<ToolTipWidget>
                                         : DescriptionWithLinks(
                                             descriptionList:
                                                 widget.descriptionList ?? [],
-                                          ), // TODO Traian: Use a list of TextLinkPair instead of description String
+                                          ),
                                   ),
                                   if ((widget.showNextButton ?? false) ||
                                       (widget.showSkipButton ?? false)) ...[
