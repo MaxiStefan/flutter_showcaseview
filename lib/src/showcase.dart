@@ -69,6 +69,10 @@ class Showcase extends StatefulWidget {
   /// Represents summary description of target widget
   final String? description;
 
+  /// It is a list of text that is used instead of description
+  /// This is used when the descripion needs to have links
+  final List<TextSpan>? descriptionList;
+
   /// ShapeBorder of the highlighted box when target widget will be showcased.
   ///
   /// Note: If [targetBorderRadius] is specified, this parameter will be ignored.
@@ -311,6 +315,7 @@ class Showcase extends StatefulWidget {
     this.buttonStyle,
     this.buttonBackgroundColor,
     this.buttonBorderColor,
+    this.descriptionList,
   })  : height = null,
         width = null,
         container = null,
@@ -359,6 +364,7 @@ class Showcase extends StatefulWidget {
     this.buttonStyle,
     this.buttonBackgroundColor,
     this.buttonBorderColor,
+    this.descriptionList,
   })  : showArrow = false,
         onToolTipClick = null,
         scaleAnimationDuration = const Duration(milliseconds: 300),
@@ -639,6 +645,7 @@ class _ShowcaseState extends State<Showcase> {
             onSkipButtonTap: () => showCaseWidgetState.dismiss(),
             titleTextDirection: widget.titleTextDirection,
             descriptionTextDirection: widget.descriptionTextDirection,
+            descriptionList: widget.descriptionList,
           ),
         ],
       ],

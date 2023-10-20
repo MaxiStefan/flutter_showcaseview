@@ -27,6 +27,7 @@ import 'package:flutter/material.dart';
 import 'enum.dart';
 import 'get_position.dart';
 import 'measure_size.dart';
+import 'tooltip_decription_widget.dart';
 
 const _kDefaultPaddingFromParent = 14.0;
 
@@ -37,6 +38,7 @@ class ToolTipWidget extends StatefulWidget {
   final String? title;
   final TextAlign? titleAlignment;
   final String? description;
+  final List<TextSpan>? descriptionList;
   final TextAlign? descriptionAlignment;
   final TextStyle? titleTextStyle;
   final TextStyle? descTextStyle;
@@ -99,6 +101,7 @@ class ToolTipWidget extends StatefulWidget {
     required this.tooltipBorderRadius,
     required this.scaleAnimationDuration,
     required this.scaleAnimationCurve,
+    this.descriptionList,
     this.scaleAnimationAlignment,
     this.isTooltipDismissed = false,
     this.tooltipPosition,
@@ -468,21 +471,27 @@ class _ToolTipWidgetState extends State<ToolTipWidget>
                                   Padding(
                                     padding: widget.descriptionPadding ??
                                         EdgeInsets.zero,
-                                    child: Text(
-                                      widget.description!,
-                                      textAlign: widget.descriptionAlignment,
-                                      textDirection:
-                                          widget.descriptionTextDirection,
-                                      style: widget.descTextStyle ??
-                                          Theme.of(context)
-                                              .textTheme
-                                              .titleSmall!
-                                              .merge(
-                                                TextStyle(
-                                                  color: widget.textColor,
-                                                ),
-                                              ),
-                                    ),
+                                    child: widget.descriptionList == null
+                                        ? Text(
+                                            widget.description!,
+                                            textAlign:
+                                                widget.descriptionAlignment,
+                                            textDirection:
+                                                widget.descriptionTextDirection,
+                                            style: widget.descTextStyle ??
+                                                Theme.of(context)
+                                                    .textTheme
+                                                    .titleSmall!
+                                                    .merge(
+                                                      TextStyle(
+                                                        color: widget.textColor,
+                                                      ),
+                                                    ),
+                                          )
+                                        : DescriptionWithLinks(
+                                            descriptionList:
+                                                widget.descriptionList ?? [],
+                                          ),
                                   ),
                                   if ((widget.showNextButton ?? false) ||
                                       (widget.showSkipButton ?? false)) ...[
